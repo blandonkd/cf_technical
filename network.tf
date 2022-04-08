@@ -7,6 +7,8 @@ resource "aws_vpc" "app_plane" {
   }
 }
 
+## TODO: add AZs to the subnets and do data calls for AZ ids
+
 # Public subnet
 resource "aws_subnet" "public_1" {
   vpc_id     = aws_vpc.main.id
