@@ -39,3 +39,15 @@ resource "aws_instance" "wpserver2" {
       name = "wpserver2"
   }
 }
+
+resource "aws_db_instance" "default" {
+  allocated_storage    = 10
+  db_subnet_group_name = aws_db_subnet_group.rds_private.id
+  engine               = "PostgreSQL"
+  engine_version       = "11"
+  instance_class       = "db.t3.micro"
+  db_name              = "RDS1"
+  username             = var.db_username
+  password             = var.db_password
+  skip_final_snapshot  = true
+}
