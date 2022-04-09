@@ -15,7 +15,7 @@ resource "aws_instance" "bastion1" {
 #Redhat instance
 resource "aws_instance" "wpserver1" {
   ami           = data.aws_ami.redhat.id
-  instance_type = "t3.micro"
+  instance_type = "t3a.micro"
   subnet_id     = aws_subnet.webapp_1.id
   root_block_device {
       encrypted = true
