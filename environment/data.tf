@@ -8,12 +8,12 @@ data "aws_ami" "windows_2019" {
   }
 }
 
-data "aws_ami" "redhat" {
-  most_recent = true
-  owners = ["amazon"]
+# data "aws_ami" "redhat" {
+#   most_recent = true
+#   owners = [309956199498]
 
-  filter {
-    name   = "name"
-    values = ["RHEL*"]
-  }
-}
+#   filter {
+#     name   = "name"
+#     values = ["RHEL*"]
+#   }
+# }
