@@ -70,7 +70,7 @@ resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.app_plane.id
 }
 
-resource "aws_nat_gateway" "example" {
+resource "aws_nat_gateway" "ngw" {
   subnet_id     = aws_subnet.public_1.id
   allocation_id = aws_eip.nat_eip.id
 
@@ -105,37 +105,52 @@ resource "aws_route_table_association" "public_2" {
   subnet_id      = aws_subnet.public_2.id
   route_table_id = aws_route_table.public.id
 }
-
 #########################
 #### PRIVATE SUBNETS ####
 #########################
 
 # Private subnet
 resource "aws_subnet" "webapp_1" {
-  vpc_id     = aws_vpc.app_plane.id
-  cidr_block = "10.1.2.0/24"
+  vpc_id            = aws_vpc.app_plane.id
+  cidr_block        = "10.1.2.0/24"
   availability_zone = "us-west-2a"
+}
+resource "aws_route_table_association" "webapp_1" {
+  subnet_id      = aws_subnet.webapp_1.id
+  route_table_id = aws_route_table.private.id
 }
 
 # Private subnet
 resource "aws_subnet" "webapp_2" {
-  vpc_id     = aws_vpc.app_plane.id
-  cidr_block = "10.1.3.0/24"
+  vpc_id            = aws_vpc.app_plane.id
+  cidr_block        = "10.1.3.0/24"
   availability_zone = "us-west-2b"
+}
+resource "aws_route_table_association" "webapp_2" {
+  subnet_id      = aws_subnet.webapp_2.id
+  route_table_id = aws_route_table.private.id
 }
 
 # Private subnet
 resource "aws_subnet" "db_1" {
-  vpc_id     = aws_vpc.app_plane.id
-  cidr_block = "10.1.4.0/24"
+  vpc_id            = aws_vpc.app_plane.id
+  cidr_block        = "10.1.4.0/24"
   availability_zone = "us-west-2a"
+}
+resource "aws_route_table_association" "db_1" {
+  subnet_id      = aws_subnet.db_1.id
+  route_table_id = aws_route_table.private.id
 }
 
 # Private subnet
 resource "aws_subnet" "db_2" {
-  vpc_id     = aws_vpc.app_plane.id
-  cidr_block = "10.1.5.0/24"
+  vpc_id            = aws_vpc.app_plane.id
+  cidr_block        = "10.1.5.0/24"
   availability_zone = "us-west-2b"
+}
+resource "aws_route_table_association" "db_2" {
+  subnet_id      = aws_subnet.db_2.id
+  route_table_id = aws_route_table.private.id
 }
 
 #######################
